@@ -1,0 +1,8 @@
+language: nodejs
+
+before_script:
+  - yarn
+
+script:
+  - yarn lint
+  - yarn build
