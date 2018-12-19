@@ -21,8 +21,8 @@ export default class Claim {
     const role = message.guild.roles.find(role => role.name.toLowerCase().includes('apprenti'));
 
     if (!(role instanceof Role)) {
-      message.delete();
-      return message.member.send("Nous n'avons pas trouvé de groupe correspondant à ta requête");
+      return message.member.send("Nous n'avons pas trouvé de groupe correspondant à ta requête")
+        .then(() => message.delete());
     }
 
     message.member.addRole(role)

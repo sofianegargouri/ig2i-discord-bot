@@ -26,10 +26,11 @@ export default class Claim {
         .catch(() => message.delete());
     }
 
-    const memberRoles = message.member.roles.map(role => role.id);
+    const memberRoles = message.member.roles
+      .map(role => role)
+      .filter(role => role.name.match(/([0-9]){4}/));
 
-    // memberRoles.length > 1 car @everyone est un rôle attribué à tout le monde
-    if (memberRoles.length > 1) {
+    if (memberRoles.length > 0) {
       return message
         .member
         .send("Nous ne t'avons pas ajouté au groupe car tu en as déjà un.")
