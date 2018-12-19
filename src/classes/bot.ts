@@ -27,8 +27,9 @@ export default class Bot {
 
 Bienvenue sur le **Discord de 2i**. Pour bien t'intégrer, je t'invite à faire les étapes suivantes:
 
-- Joindre ta promotion: \`/claim <année de promotion>\`
-- Si tu es apprenti: \`/app\`
+- Renomme-toi avec ton prénom/nom afin d'être identifiable par tout le monde
+- Rejoins ta promotion: \`/claim <année de promotion>\`
+- **Bonus**: Si tu es apprenti: \`/app\`
 
 N'hésite pas à MP un admin si tu as des soucis ! :wink:`);
     });

@@ -27,15 +27,17 @@ export default class Claim {
 
     message.member.addRole(role)
       .then(() => {
-        if (!message.member.nickname.includes('💰')) {
-          message.member.setNickname(`${message.member.nickname} 💰`);
+        if (!message.member.nickname || !message.member.nickname.includes('💰')) {
+          message.member.setNickname(`${message.member.nickname || message.author.username} 💰`);
         }
-        message.member.send(`Tu as bien été ajouté au groupe ${role.name}`);
-        message.delete();
+        message.member.send(`Tu as bien été ajouté au groupe ${role.name}`)
+          .then(() => message.delete())
+          .catch(() => message.delete());
       })
       .catch(() => {
-        message.member.send(`Il y a eu une erreur lors de l'ajout au groupe ${role.name}`);
-        message.delete();
+        message.member.send(`Il y a eu une erreur lors de l'ajout au groupe ${role.name}`)
+          .then(() => message.delete())
+          .catch(() => message.delete());
       });
   }
 }
