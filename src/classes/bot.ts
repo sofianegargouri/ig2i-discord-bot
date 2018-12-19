@@ -1,4 +1,4 @@
-import discordJs, { Client } from 'discord.js';
+import discordJs, { Client, GuildMember } from 'discord.js';
 import { movies } from '../constants';
 
 export default class Bot {
@@ -11,11 +11,27 @@ export default class Bot {
     this.token = token;
 
     this.login()
-      .then(() => this.setStatus());
+      .then(() => {
+        this.setJoinhook();
+        this.setStatus();
+      });
   }
 
   login() {
     return this.client.login(this.token);
+  }
+
+  setJoinhook() {
+    this.client.on('guildMemberAdd', (member: GuildMember) => {
+      member.user.send(`Hello ! :wave:
+
+Bienvenue sur le **Discord de 2i**. Pour bien t'intégrer, je t'invite à faire les étapes suivantes:
+
+- Joindre ta promotion: \`/claim <année de promotion>\`
+- Si tu es apprenti: \`/app\`
+
+N'hésite pas à MP un admin si tu as des soucis ! :wink:`);
+    });
   }
 
   setStatus() {

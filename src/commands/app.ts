@@ -14,6 +14,10 @@ export default class Claim {
       return null;
     }
 
+    if (message.guild === null) {
+      return message.member.send("Tu n'appartiens pas au serveur");
+    }
+
     const role = message.guild.roles.find(role => role.name.toLowerCase().includes('apprenti'));
 
     if (!(role instanceof Role)) {
