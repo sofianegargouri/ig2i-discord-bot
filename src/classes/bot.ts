@@ -4,21 +4,23 @@ import { movies } from '../constants';
 export default class Bot {
   public client: Client;
   private token: string | undefined;
-  private statusIndex: number = 0;
+  private statusIndex: number = 1;
 
   constructor(token: string | undefined) {
     this.client = new discordJs.Client();
     this.token = token;
 
-    this.login();
-    this.setStatus();
+    this.login()
+      .then(() => this.setStatus());
   }
 
   login() {
-    this.client.login(this.token);
+    return this.client.login(this.token);
   }
 
   setStatus() {
+    this.client.user.setActivity(movies[0], { type: 'WATCHING' });
+
     setInterval(
       () => {
         if (this.statusIndex + 1 >= movies.length) {
